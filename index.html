@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TU Aroi — Evens & Food Guide</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#discover" aria-label="หน้าแรก Campus Guide">
+      <span class="brand-mark">TU</span> 
+      <span>TU Aroi</span>
+    </a>
+    <nav class="nav" aria-label="การนำทางหลัก">
+      <a href="#discover">สำรวจ</a>
+      <a href="#map">แผนที่</a>
+      <a href="#events">กิจกรรม</a>
+      <a href="#profile">โปรไฟล์</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" id="theme-toggle" class="icon-btn" title="สลับธีมมืด/สว่าง">🌙</button>
+      <button class="menu" aria-label="เปิดเมนู">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="discover" class="hero page-section">
+      <div class="hero-copy">
+        <span class="eyebrow">รอบรั้วแม่โดม</span>
+        <h1>ค้นพบสถานที่<br><span>โปรดแห่งใหม่ของคุณ</span></h1>
+        <p>สำรวจร้านอาหาร คาเฟ่ พื้นที่อ่านหนังสือ และกิจกรรมสุดฮิตรอบ มธ. รังสิต</p>
+        
+        <form class="search" action="#featured">
+          <span class="search-icon">⌕</span>
+          <input aria-label="ค้นหามหาวิทยาลัย" placeholder="ค้นหาร้านอาหาร คาเฟ่ หรือสถานที่..." />
+          <button type="submit">ค้นหา</button>
+        </form>
+        
+        <div class="quick-tags" aria-label="หมวดยอดนิยม">
+          <a href="#featured">ร้านอาหาร</a>
+          <a href="#featured">คาเฟ่</a>
+          <a href="#featured">อ่านหนังสือ</a>
+          <a href="#events">กิจกรรม</a>
+          <a href="#map">ใกล้ฉัน</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card hero-card--main">
+          <img src="assets/a78675e66c35b50741567e1a8b9a81efdc893764" alt="คาเฟ่ในสโมสรนักศึกษา" />
+          <div class="hero-card__footer">
+            <strong>คาเฟ่สโมสรนักศึกษา</strong>
+            <span>เปิดอยู่</span>
+          </div>
+        </div>
+        <div class="floating-note note-one">
+          <b>4.8 ★</b>
+          <span>คะแนนจากชาว มธ.</span>
+        </div>
+        <div class="floating-note note-two">
+          <b>5 นาที</b>
+          <span>ระยะเดินจากเชียงราก</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Section -->
+    <section id="featured" class="content-section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">สำรวจ</span>
+          <h2>ยอดนิยมใน TU รังสิต</h2>
+        </div>
+        <a class="text-link" href="#map">ดูทั้งหมด <span>→</span></a>
+      </div>
+
+      <div class="card-grid">
+        <article class="place-card">
+          <div class="place-media">
+            <img src="assets/74fe049297188dee2520ca5921c674bcf96f2369" alt="ภายในคาเฟ่" />
+            <span class="badge badge--yellow">4.9 ★</span>
+          </div>
+          <div class="place-body">
+            <p class="kicker">คาเฟ่ · อ่านหนังสือ</p>
+            <h3>The Commons</h3>
+            <p>บรรยากาศอบอุ่น กาแฟเสิร์ฟไว และมีปลั๊กไฟบริการจำนวนมาก</p>
+            <div class="meta">
+              <span>⌖ 3 นาที</span>
+              <span>● เปิดอยู่</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="place-card">
+          <div class="place-media">
+            <img src="assets/53516f7ae0863f9cf627ede55e579dcd2dd7e68c" alt="ศูนย์อาหาร" />
+            <span class="badge">ยอดนิยม</span>
+          </div>
+          <div class="place-body">
+            <p class="kicker">อาหาร · พบปะสังสรรค์</p>
+            <h3>ศูนย์อาหารทิวสน</h3>
+            <p>อาหารกลางวันหลากหลาย ร้านเด็ดเพียบ โต๊ะนั่งโปร่งสบาย</p>
+            <div class="meta">
+              <span>⌖ 5 นาที</span>
+              <span>● เปิดอยู่</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="place-card">
+          <div class="place-media">
+            <img src="assets/4d154a9a3558c3aa55cf0f24b4b54d306bb87725d82eccad5815913b9ef0120b" alt="พื้นที่อ่านหนังสือ" />
+            <span class="badge badge--yellow">เงียบสงบ</span>
+          </div>
+          <div class="place-body">
+            <p class="kicker">อ่านหนังสือ · หอสมุด</p>
+            <h3>หอสมุดป๋วย อึ๊งภากรณ์</h3>
+            <p>มุมสงบสำหรับอ่านหนังสือ ติวสอบ ทำงานกลุ่ม แอร์เย็นสบาย</p>
+            <div class="meta">
+              <span>⌖ 7 นาที</span>
+              <span>◌ ปิด 21:00 น.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="map" class="map-section page-section">
+      <div class="map-copy">
+        <span class="eyebrow">การเดินทาง</span>
+        <h2>ทุกสถานที่<br>อยู่ในระยะเดินถึง</h2>
+        <p>ค้นหาสถานที่กิน แหล่งสังสรรค์ และพิกัดสำคัญภายใน มธ. รังสิต</p>
+        
+        <div class="location-card">
+          <span class="pin">📍</span>
+          <div>
+            <strong>อาคารสโมสรนักศึกษา</strong>
+            <small>โซนกิจกรรมนักศึกษา</small>
+          </div>
+          <span class="distance">2 นาที</span>
+        </div>
+
+        <div class="location-card">
+          <span class="pin">📍</span>
+          <div>
+            <strong>หอสมุดป๋วย อึ๊งภากรณ์</strong>
+            <small>ใจกลางมหาวิทยาลัย</small>
+          </div>
+          <span class="distance">5 นาที</span>
+        </div>
+      </div>
+
+      <div class="map-frame">
+        <div id="leaflet-map" style="width: 100%; height: 100%; min-height: 500px;"></div>
+        <button type="button" id="locate-btn" class="map-locate-btn">📍 ตำแหน่งของฉัน</button>
+      </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="content-section events-section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">กิจกรรมน่าสนใจ</span>
+          <h2>กิจกรรมที่กำลังจะมาถึง</h2>
+        </div>
+        <a class="text-link" href="#discover">ดูปฏิทินกิจกรรม <span>→</span></a>
+      </div>
+
+      <div class="event-list">
+        <article class="event-row">
+          <div class="event-date">
+            <b>08</b>
+            <span>ก.ย.</span>
+          </div>
+          <div class="event-thumb">
+            <img src="assets/f0375f6a48b7a4dfe823966f08d16f164cab03c0" alt="กิจกรรมกลางแจ้ง" />
+          </div>
+          <div class="event-info">
+            <span class="kicker">ชีวิตในรั้วมหาลัย</span>
+            <h3>TU Beats Festival</h3>
+            <p>ดนตรีสด · ลานกิจกรรมพญานาค · 18:00 น.</p>
+          </div>
+          <button type="button" class="outline-btn">บันทึก</button>
+        </article>
+
+        <article class="event-row">
+          <div class="event-date">
+            <b>12</b>
+            <span>ก.ย.</span>
+          </div>
+          <div class="event-thumb">
+            <img src="assets/dc1af71bb34b0b88fa9d5c07a16b0ffc580dd15d" alt="การบรรยายในหอประชุม" />
+          </div>
+          <div class="event-info">
+            <span class="kicker">วิชาการและการเรียนรู้</span>
+            <h3>Student Speaker Series</h3>
+            <p>หอประชุมใหญ่ มธ. รังสิต · 16:30 น.</p>
+          </div>
+          <button type="button" class="outline-btn">บันทึก</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- Profile & Auth Section -->
+    <section id="profile" class="profile-section page-section">
+      <div id="auth-container" class="auth-card">
+        <div class="auth-tabs">
+          <button type="button" id="tab-login" class="tab-btn active">เข้าสู่ระบบ</button>
+          <button type="button" id="tab-register" class="tab-btn">ลงทะเบียน</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <h2>เข้าสู่ระบบโปรไฟล์ของคุณ</h2>
+          <p>เข้าสู่ระบบเพื่อบันทึกร้านโปรดและกิจกรรมของคุณ</p>
+          <div class="form-group">
+            <label for="login-email">อีเมล</label>
+            <input type="email" id="login-email" required placeholder="example@tu.ac.th">
+          </div>
+          <div class="form-group">
+            <label for="login-password">รหัสผ่าน</label>
+            <input type="password" id="login-password" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="primary-btn full-width">เข้าสู่ระบบ</button>
+        </form>
+
+        <form id="register-form" class="auth-form" style="display: none;">
+          <h2>สร้างบัญชีผู้ใช้ใหม่</h2>
+          <p>กรอกข้อมูลด้านล่างเพื่อเริ่มต้นใช้งานระบบ</p>
+          <div class="form-group">
+            <label for="reg-fullname">ชื่อ - นามสกุล</label>
+            <input type="text" id="reg-fullname" required placeholder="สมชาย ใจดี">
+          </div>
+          <div class="form-group">
+            <label for="reg-phone">เบอร์โทรศัพท์</label>
+            <input type="tel" id="reg-phone" required placeholder="0812345678" pattern="[0-9]{9,10}">
+          </div>
+          <div class="form-group">
+            <label for="reg-faculty">คณะ / ภาควิชา</label>
+            <input type="text" id="reg-faculty" placeholder="เช่น พาณิชยศาสตร์ฯ, วิศวกรรมศาสตร์">
+          </div>
+          <div class="form-group">
+            <label for="reg-email">อีเมล</label>
+            <input type="email" id="reg-email" required placeholder="example@tu.ac.th">
+          </div>
+          <div class="form-group">
+            <label for="reg-password">รหัสผ่าน</label>
+            <input type="password" id="reg-password" required minlength="6" placeholder="อย่างน้อย 6 ตัวอักษร">
+          </div>
+          <button type="submit" class="primary-btn full-width">ลงทะเบียนสมาชิก</button>
+        </form>
+      </div>
+
+      <div id="user-profile-card" class="profile-card" style="display: none;">
+        <div class="avatar-wrap">
+          <img src="assets/017decc6a0e2aa7229efac9a948248798e291efc" alt="โปรไฟล์" />
+        </div>
+        <div class="profile-copy">
+          <span class="eyebrow">โปรไฟล์สมาชิก</span>
+          <h2 id="welcome-text">ยินดีต้อนรับกลับมา!</h2>
+          <p id="user-info-detail" style="font-size: 13px; color: var(--muted); margin-bottom: 12px;"></p>
+          <div class="profile-actions">
+            <a class="primary-btn" href="#featured">สถานที่บันทึกไว้</a>
+            <button id="logout-btn" class="secondary-btn">ออกจากระบบ</button>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <div><b id="saved-count">12</b><span>บันทึกแล้ว</span></div>
+          <div><b>4</b><span>เคยไปแล้ว</span></div>
+          <div><b>8</b><span>กำลังติดตาม</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="brand">
+      <span class="brand-mark">TU</span>
+      <span>TU Aroi Guide</span>
+    </div>
+    <p>© ออกแบบและพัฒนาสำหรับชาวธรรมศาสตร์</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
