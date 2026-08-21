@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ----------------------------------------------------
-  // 3. ระบบเข้าสู่ระบบ & ลงทะเบียน
+  // 3. ระบบเข้าสู่ระบบ & ลงทะเบียน (เชื่อมต่อ Backend Supabase)
   // ----------------------------------------------------
   const tabLogin = document.getElementById('tab-login');
   const tabRegister = document.getElementById('tab-register');
@@ -93,7 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const welcomeText = document.getElementById('welcome-text');
   const userInfoDetail = document.getElementById('user-info-detail');
   const logoutBtn = document.getElementById('logout-btn');
+  
+  // กำหนดค่าการเชื่อมต่อ (ปรับ URL ให้ชี้ไปที่ API Endpoint ที่ถูกต้อง)
+  const supabaseUrl = 'https://lcmqqovjgdkcbwyxxfwa.supabase.co';
+  const supabaseKey = 'sb_publishable_ljqn7Kr_anpQJ2k7PvHSig_zRSS5o-8';
+  // สร้างตัวแปรสำหรับเรียกใช้งานฐานข้อมูลผ่าน window.supabase (จาก CDN ใน index.html)
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
+  // สลับแท็บ เข้าสู่ระบบ / ลงทะเบียน
   if (tabLogin && tabRegister) {
     tabLogin.addEventListener('click', () => {
       tabLogin.classList.add('active');
@@ -110,71 +117,132 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
-  if (loggedInUser) {
-    showProfile(loggedInUser);
+  // ฟังก์ชันดึงข้อมูลโปรไฟล์จากตาราง users
+  async function fetchProfileAndShow(user) {
+    try {
+      const { data: profile, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+      
+      if (profile && welcomeText && userInfoDetail) {
+        welcomeText.textContent = `ยินดีต้อนรับ, ${profile.full_name}!`;
+        userInfoDetail.innerHTML = `
+          📧 อีเมล: ${user.email}<br>
+          📞 เบอร์โทรศัพท์: ${profile.phone || '-'}<br>
+          🎓 คณะ/ภาควิชา: ${profile.major || '-'}
+        `;
+        authContainer.style.display = 'none';
+        profileCard.style.display = 'grid';
+      }
+    } catch (err) {
+      console.error("Error fetching profile:", err);
+    }
   }
 
+  // ตรวจสอบว่าเคยล็อกอินค้างไว้หรือไม่ (เช็ก Session)
+  async function checkUserSession() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      fetchProfileAndShow(session.user);
+    }
+  }
+  checkUserSession();
+
+  // จัดการการลงทะเบียน
   if (registerForm) {
-    registerForm.addEventListener('submit', (e) => {
+    registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const newUser = {
-        fullname: document.getElementById('reg-fullname').value,
-        phone: document.getElementById('reg-phone').value,
-        faculty: document.getElementById('reg-faculty').value || '-',
-        email: document.getElementById('reg-email').value,
-        password: document.getElementById('reg-password').value
-      };
+      
+      // เปลี่ยนข้อความปุ่มเพื่อบอกผู้ใช้ว่ากำลังโหลด
+      const btn = registerForm.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.textContent = 'กำลังลงทะเบียน...';
+      btn.disabled = true;
 
-      let users = JSON.parse(localStorage.getItem('usersList')) || [];
-      users.push(newUser);
-      localStorage.setItem('usersList', JSON.stringify(users));
+      const fullname = document.getElementById('reg-fullname').value;
+      const phone = document.getElementById('reg-phone').value;
+      const faculty = document.getElementById('reg-faculty').value || '-';
+      const email = document.getElementById('reg-email').value;
+      const password = document.getElementById('reg-password').value;
 
-      localStorage.setItem('currentUser', JSON.stringify(newUser));
-      alert('ลงทะเบียนสำเร็จแล้ว!');
-      showProfile(newUser);
-    });
-  }
+      try {
+        // 1. สมัครสมาชิกผ่าน Authentication
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+          email: email,
+          password: password,
+        });
 
-  if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
+        if (authError) throw authError;
 
-      const users = JSON.parse(localStorage.getItem('usersList')) || [];
-      const matchedUser = users.find(u => u.email === email && u.password === password);
+        // 2. บันทึกข้อมูลที่เหลือลงตาราง users
+        if (authData.user) {
+          const { error: profileError } = await supabase.from('users').insert([
+            {
+              id: authData.user.id,
+              full_name: fullname,
+              phone: phone,
+              major: faculty,
+              email: email
+            }
+          ]);
 
-      if (matchedUser) {
-        localStorage.setItem('currentUser', JSON.stringify(matchedUser));
-        showProfile(matchedUser);
-      } else {
-        const tempUser = { fullname: email.split('@')[0], email: email, phone: '-', faculty: '-' };
-        localStorage.setItem('currentUser', JSON.stringify(tempUser));
-        showProfile(tempUser);
+          if (profileError) throw profileError;
+
+          alert('ลงทะเบียนสำเร็จแล้ว!');
+          fetchProfileAndShow(authData.user);
+          registerForm.reset();
+        }
+      } catch (error) {
+        alert('เกิดข้อผิดพลาดในการลงทะเบียน: ' + error.message);
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
       }
     });
   }
 
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      localStorage.removeItem('currentUser');
-      authContainer.style.display = 'block';
-      profileCard.style.display = 'none';
+  // จัดการการเข้าสู่ระบบ
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const btn = loginForm.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.textContent = 'กำลังเข้าสู่ระบบ...';
+      btn.disabled = true;
+
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      try {
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password,
+        });
+
+        if (authError) throw authError;
+
+        fetchProfileAndShow(authData.user);
+        loginForm.reset();
+      } catch (error) {
+        alert('เข้าสู่ระบบไม่สำเร็จ: รหัสผ่านผิด หรืออีเมลไม่ถูกต้อง');
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
     });
   }
 
-  function showProfile(user) {
-    if (welcomeText && userInfoDetail) {
-      welcomeText.textContent = `ยินดีต้อนรับ, ${user.fullname}!`;
-      userInfoDetail.innerHTML = `
-        📧 อีเมล: ${user.email}<br>
-        📞 เบอร์โทรศัพท์: ${user.phone}<br>
-        🎓 คณะ/ภาควิชา: ${user.faculty}
-      `;
-      authContainer.style.display = 'none';
-      profileCard.style.display = 'grid';
-    }
+  // จัดการการออกจากระบบ
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      authContainer.style.display = 'block';
+      profileCard.style.display = 'none';
+      alert('ออกจากระบบเรียบร้อยแล้ว');
+    });
   }
 
   // ----------------------------------------------------
