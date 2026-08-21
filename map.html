@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แผนที่วิทยาเขต - UniDirectory</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 10-5-10-5z" fill="currentColor"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+      UniDirectory
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">ค้นพบ</a>
+      <a href="profile.html">บันทึกไว้</a>
+      <a href="events.html">กิจกรรม</a>
+      <a href="map.html" class="active">แผนที่วิทยาเขต</a>
+    </nav>
+    <div class="header-actions">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="ค้นหาสถานที่...">
+      </div>
+      <button class="icon-btn" aria-label="การแจ้งเตือน">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="dot"></span>
+      </button>
+      <button class="icon-btn" aria-label="บัญชีผู้ใช้">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container" style="padding-top:24px; padding-bottom:60px;">
+
+    <div class="map-toolbar">
+      <div>
+        <h1 style="font-size:24px;">แผนที่วิทยาเขต</h1>
+        <p style="font-size:13.5px; color:var(--text-muted); margin-top:4px;">อาคารรวมกิจกรรมนักศึกษา ชั้น G — ปักหมุดอยู่</p>
+      </div>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div class="view-toggle">
+          <button class="active" type="button">🗺️ มุมมองแผนที่</button>
+          <button type="button">📋 มุมมองรายการ</button>
+        </div>
+        <div class="map-actions">
+          <button class="btn btn-outline" type="button">🚶 เส้นทาง</button>
+          <button class="btn btn-primary" type="button">⭐ รีวิว</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-stage">
+      <!-- Stylized campus blocks -->
+      <div class="map-building" style="top:8%; left:6%; width:14%; height:16%;"></div>
+      <div class="map-building green" style="top:6%; left:24%; width:18%; height:12%;"></div>
+      <div class="map-building" style="top:22%; left:8%; width:10%; height:14%;"></div>
+      <div class="map-building" style="top:12%; left:46%; width:16%; height:18%;"></div>
+      <div class="map-building green" style="top:8%; left:66%; width:20%; height:14%;"></div>
+      <div class="map-building" style="top:34%; left:30%; width:14%; height:16%;"></div>
+      <div class="map-building" style="top:38%; left:58%; width:18%; height:14%;"></div>
+      <div class="map-building green" style="top:36%; left:80%; width:14%; height:20%;"></div>
+      <div class="map-building" style="top:56%; left:10%; width:16%; height:16%;"></div>
+      <div class="map-building green" style="top:58%; left:32%; width:12%; height:18%;"></div>
+      <div class="map-building" style="top:60%; left:50%; width:20%; height:14%;"></div>
+      <div class="map-building" style="top:56%; left:76%; width:16%; height:16%;"></div>
+      <div class="map-building" style="top:76%; left:20%; width:18%; height:14%;"></div>
+      <div class="map-building green" style="top:78%; left:44%; width:14%; height:14%;"></div>
+      <div class="map-building" style="top:76%; left:64%; width:16%; height:16%;"></div>
+
+      <div class="map-pin pin-selected" style="top:26%; left:54%;" data-name="The Quad Coffee" data-desc="อาคารรวมกิจกรรมนักศึกษา ชั้น G, ปีกเหนือ">
+        <span class="label">The Quad Coffee</span>
+        <span class="dot"></span>
+      </div>
+      <div class="map-pin pin-food" style="top:44%; left:30%;" data-name="Library Tavern" data-desc="อาคารกิจกรรมนักศึกษา ชั้น 2">
+        <span class="label">Library Tavern</span>
+        <span class="dot"></span>
+      </div>
+      <div class="map-pin pin-food" style="top:62%; left:70%;" data-name="Green Bowl" data-desc="โรงอาหารกลาง ชั้น 1">
+        <span class="label">Green Bowl</span>
+        <span class="dot"></span>
+      </div>
+      <div class="map-pin pin-study" style="top:18%; left:78%;" data-name="ห้องสมุดกลาง" data-desc="อาคารห้องสมุด ชั้น 1-3">
+        <span class="label">ห้องสมุดกลาง</span>
+        <span class="dot"></span>
+      </div>
+      <div class="map-pin pin-dorm" style="top:82%; left:38%;" data-name="หอพักนักศึกษา A" data-desc="โซนหอพัก ฝั่งตะวันออก">
+        <span class="label">หอพัก A</span>
+        <span class="dot"></span>
+      </div>
+
+      <div class="map-popup">
+        <div class="popup-head">
+          <span>ตำแหน่งที่เลือก</span>
+          <button type="button" aria-label="ปิด">✕</button>
+        </div>
+        <div class="popup-thumb">
+          <svg viewBox="0 0 260 90" xmlns="http://www.w3.org/2000/svg">
+            <rect width="260" height="90" fill="#eef1e9"/>
+            <rect x="15" y="15" width="50" height="35" fill="#f3efe6" stroke="#d8d0bd"/>
+            <rect x="90" y="35" width="60" height="45" fill="#f3efe6" stroke="#d8d0bd"/>
+            <rect x="175" y="10" width="70" height="30" fill="#cfe3c0" stroke="#a9c894"/>
+            <circle cx="130" cy="45" r="6" fill="#8a1f3d" stroke="#fff" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="popup-body">
+          <h4>The Quad Coffee</h4>
+          <p>อาคารรวมกิจกรรมนักศึกษา ชั้น G, ปีกเหนือ</p>
+          <a href="#" class="gmaps">🧭 เปิดใน Google Maps</a>
+          <button class="btn btn-primary btn-block btn-sm" type="button">เพิ่มไปยังแผนที่ของฉัน</button>
+        </div>
+      </div>
+
+      <div class="map-legend">
+        <span class="item"><span class="swatch" style="background:var(--maroon);"></span> จุดที่คุณเลือกอยู่</span>
+        <span class="item"><span class="swatch" style="background:var(--gold);"></span> ร้านอาหาร</span>
+        <span class="item"><span class="swatch" style="background:#d24f9c;"></span> ห้องสมุด</span>
+        <span class="item"><span class="swatch" style="background:#2f6fed;"></span> หอพัก</span>
+      </div>
+
+      <button class="map-locate" type="button" aria-label="ตำแหน่งของฉัน">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+      </button>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-brand">UniDirectory</span>
+    <span class="footer-copy">© 2024 สารบบนักศึกษามหาวิทยาลัย สร้างขึ้นเพื่อชุมชนวิชาการ</span>
+    <nav class="footer-links">
+      <a href="#">ความปลอดภัยในวิทยาเขต</a>
+      <a href="#">การเข้าถึง</a>
+      <a href="#">นโยบายความเป็นส่วนตัว</a>
+      <a href="#">ติดต่อฝ่ายสนับสนุน</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>โปรไฟล์ - UniDirectory</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 10-5-10-5z" fill="currentColor"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+      UniDirectory
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">ค้นพบ</a>
+      <a href="profile.html" class="active">บันทึกไว้</a>
+      <a href="events.html">กิจกรรม</a>
+      <a href="map.html">แผนที่วิทยาเขต</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="ค้นหา">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="การแจ้งเตือน">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="dot"></span>
+      </button>
+      <button class="icon-btn" aria-label="บัญชีผู้ใช้">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>
+      </button>
+      <button class="nav-toggle" aria-label="เมนู">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container" style="padding-top:28px; padding-bottom:60px;">
+    <div class="profile-grid">
+
+      <div>
+        <div class="profile-card">
+          <img class="avatar" src="img/avatar-alex.svg" alt="รูปโปรไฟล์ของอเล็กซ์ เชน">
+          <h2>อเล็กซ์ เชน</h2>
+          <p class="sub">วิทยาการคอมพิวเตอร์, รุ่นปี '25</p>
+          <button class="btn btn-primary btn-block" type="button">แก้ไขโปรไฟล์</button>
+        </div>
+
+        <div class="stat-card">
+          <h3>กิจกรรม</h3>
+          <div class="stat-row"><span>🔖 สถานที่ที่บันทึกไว้</span><span class="num">12</span></div>
+          <div class="stat-row"><span>📝 รีวิว</span><span class="num">8</span></div>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="section-title">🔖 สถานที่ที่บันทึกไว้</h2>
+        <div class="saved-grid">
+          <article class="saved-card">
+            <div class="photo">
+              <img src="img/study-room.svg" alt="ห้องสมุดกลาง">
+              <span class="bookmark-flag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h12a1 1 0 011 1v19l-7-4-7 4V3a1 1 0 011-1z"/></svg>
+              </span>
+            </div>
+            <div class="info">
+              <h4>ห้องสมุดกลาง</h4>
+              <p class="cat">📖 โซนอ่านหนังสือ</p>
+              <div class="meta">
+                <span>ห่างออกไป 0.2 ไมล์</span>
+                <span class="status-pill status-open">เปิดอยู่</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="saved-card">
+            <div class="photo">
+              <img src="img/campus-roasters.svg" alt="แคมปัส โรสเตอร์ส">
+              <span class="bookmark-flag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h12a1 1 0 011 1v19l-7-4-7 4V3a1 1 0 011-1z"/></svg>
+              </span>
+            </div>
+            <div class="info">
+              <h4>แคมปัส โรสเตอร์ส</h4>
+              <p class="cat">🍽️ อาหารและเครื่องดื่ม</p>
+              <div class="meta">
+                <span>ห่างออกไป 0.5 ไมล์</span>
+                <span class="status-pill status-closing">กำลังจะปิด</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <h2 class="section-title">📝 รีวิวที่ผ่านมา</h2>
+        <div class="review-item">
+          <img class="review-thumb" src="img/campus-roasters.svg" alt="แคมปัส โรสเตอร์ส">
+          <div class="review-body">
+            <div class="review-top">
+              <div>
+                <h4>แคมปัส โรสเตอร์ส</h4>
+                <p class="date">12 ต.ค. 2024</p>
+              </div>
+              <span class="stars">★★★★☆</span>
+            </div>
+            <p class="review-text">สถานที่ที่ดีมากสำหรับการอ่านหนังสือระหว่างรอเรียน แต่ช่วงเที่ยงจะเสียงดังหน่อย วานิลลาลาเต้รสชาติดีคงเส้นคงวามาครับ</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-brand">UniDirectory</span>
+    <nav class="footer-links">
+      <a href="#">ความปลอดภัยในวิทยาเขต</a>
+      <a href="#">การเข้าถึง</a>
+      <a href="#">นโยบายความเป็นส่วนตัว</a>
+      <a href="#">ติดต่อฝ่ายสนับสนุน</a>
+    </nav>
+    <span class="footer-copy">© 2024 สารบบนักศึกษามหาวิทยาลัย สร้างขึ้นเพื่อชุมชนวิชาการ</span>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

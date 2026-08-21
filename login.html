@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เข้าสู่ระบบ - UniDirectory</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<main>
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 10-5-10-5z" fill="currentColor"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+      </div>
+      <h1>UniDirectory</h1>
+      <p class="lede">เข้าสู่ระบบเพื่อเข้าใช้งานคู่มือแผนที่มหาวิทยาลัยของคุณ</p>
+
+      <button class="btn btn-outline-maroon btn-block" type="button">
+        🏛️ เข้าสู่ระบบด้วยรหัสนักศึกษา
+      </button>
+      <p class="helper">✅ สำหรับการเข้าใช้งานของนักศึกษาที่ได้รับการยืนยันแล้วเท่านั้น</p>
+
+      <div class="divider">หรือเข้าสู่ระบบแบบปกติ</div>
+
+      <form class="login-form">
+        <div class="form-error"></div>
+
+        <div class="field">
+          <label for="email">อีเมล</label>
+          <div class="input-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+            <input type="email" id="email" placeholder="student@university.edu" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-row-between">
+            <label for="password">รหัสผ่าน</label>
+            <a href="#">ลืมรหัสผ่าน?</a>
+          </div>
+          <div class="input-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+            <input type="password" id="password" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">เข้าสู่ระบบ →</button>
+      </form>
+
+      <p class="login-footer-text">เพิ่งเข้าเรียนหรือ? <a href="#">สร้างบัญชีใหม่</a></p>
+    </div>
+  </div>
+</main>
+
+<script src="js/script.js"></script>
+</body>
+</html>

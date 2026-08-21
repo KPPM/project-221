@@ -1,238 +1,187 @@
+/* =========================================================
+   UniDirectory — shared behaviors
+   Works across all pages; every block checks the element
+   exists before wiring up, so one file can be reused site-wide.
+   ========================================================= */
+
 document.addEventListener('DOMContentLoaded', () => {
-  // ----------------------------------------------------
-  // 1. แผนที่ Leaflet.js (จุดศูนย์กลาง: มธรรมศาสตร์ ศูนย์รังสิต)
-  // ----------------------------------------------------
-  const tuRangsitLat = 14.0722;
-  const tuRangsitLng = 100.6017;
-  const initialZoom = 15;
 
-  const map = L.map('leaflet-map').setView([tuRangsitLat, tuRangsitLng], initialZoom);
+  /* ---------- Mobile nav toggle ---------- */
+  const navToggle = document.querySelector('.nav-toggle');
+  const mainNav = document.querySelector('.main-nav');
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const open = mainNav.classList.toggle('open');
+      mainNav.style.display = open ? 'flex' : '';
+    });
+  }
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap'
-  }).addTo(map);
-
-  // ปักหมุดสถานที่สำคัญภายใน มธ. รังสิต
-  const places = [
-    { name: "อาคารสโมสรนักศึกษา มธ.", lat: 14.0735, lng: 100.6030 },
-    { name: "หอสมุดป๋วย อึ๊งภากรณ์", lat: 14.0722, lng: 100.6017 },
-    { name: "ศูนย์อาหารทิวสน", lat: 14.0705, lng: 100.6025 },
-    { name: "บร.1 (ตึกเรียนรวม)", lat: 14.0715, lng: 100.6040 }
-  ];
-
-  places.forEach(place => {
-    L.marker([place.lat, place.lng])
-      .addTo(map)
-      .bindPopup(`<b>${place.name}</b>`);
+  /* ---------- Sidebar category filter list ---------- */
+  document.querySelectorAll('.filter-list').forEach(list => {
+    list.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        list.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
   });
 
-  // ปุ่ม ค้นหาตำแหน่ง GPS ของผู้ใช้
-  let userMarker = null;
-  const locateBtn = document.getElementById("locate-btn");
+  /* ---------- Price range selector ---------- */
+  document.querySelectorAll('.price-row').forEach(row => {
+    row.querySelectorAll('.price-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        row.querySelectorAll('.price-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+  });
 
-  if (locateBtn) {
-    locateBtn.addEventListener("click", () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const userLat = position.coords.latitude;
-            const userLng = position.coords.longitude;
+  /* ---------- Clear filters ---------- */
+  const clearBtn = document.querySelector('.clear-filters');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-list button').forEach((b, i) => b.classList.toggle('active', i === 0));
+      document.querySelectorAll('.checkbox-row input').forEach(c => c.checked = false);
+      document.querySelectorAll('.price-btn').forEach(b => b.classList.remove('selected'));
+    });
+  }
 
-            if (userMarker) {
-              map.removeLayer(userMarker);
-            }
+  /* ---------- Pill filters (events page) ---------- */
+  document.querySelectorAll('.event-filters .pill, .pill-group .pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const group = pill.parentElement;
+      group.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+  });
 
-            userMarker = L.circleMarker([userLat, userLng], {
-              color: '#D9381E',
-              fillColor: '#D9381E',
-              fillOpacity: 0.9,
-              radius: 9
-            }).addTo(map).bindPopup("<b>คุณอยู่ที่นี่</b>").openPopup();
+  /* ---------- Save / bookmark heart toggle on cards ---------- */
+  document.querySelectorAll('.save-heart').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      btn.classList.toggle('saved');
+    });
+  });
 
-            map.setView([userLat, userLng], 17);
-          },
-          () => {
-            alert("ไม่สามารถเข้าถึงตำแหน่งของคุณได้ กรุณาเปิดการอนุญาตตั้งค่าตำแหน่งในเบราว์เซอร์");
-          }
-        );
-      } else {
-        alert("เบราว์เซอร์ของคุณไม่รองรับระบบระบุตำแหน่ง GPS");
+  /* ---------- Load more (simulated) ---------- */
+  const loadMoreBtn = document.querySelector('.load-more-btn');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      loadMoreBtn.textContent = 'กำลังโหลด...';
+      loadMoreBtn.disabled = true;
+      setTimeout(() => {
+        loadMoreBtn.textContent = 'โหลดครบทั้งหมดแล้ว';
+      }, 700);
+    });
+  }
+
+  /* ---------- Star picker (review form) ---------- */
+  const starPicker = document.querySelector('.star-picker');
+  if (starPicker) {
+    const stars = [...starPicker.querySelectorAll('button')];
+    stars.forEach((star, idx) => {
+      star.addEventListener('click', () => {
+        stars.forEach((s, i) => s.classList.toggle('filled', i <= idx));
+        starPicker.dataset.value = idx + 1;
+      });
+      star.addEventListener('mouseenter', () => {
+        stars.forEach((s, i) => s.classList.toggle('filled', i <= idx));
+      });
+    });
+    starPicker.addEventListener('mouseleave', () => {
+      const val = parseInt(starPicker.dataset.value || '0', 10);
+      stars.forEach((s, i) => s.classList.toggle('filled', i < val));
+    });
+  }
+
+  /* ---------- Review textarea char counter ---------- */
+  const reviewText = document.querySelector('#reviewText');
+  const charCount = document.querySelector('.char-count');
+  if (reviewText && charCount) {
+    const max = 500;
+    const update = () => { charCount.textContent = `${reviewText.value.length} / ${max}`; };
+    reviewText.addEventListener('input', () => {
+      if (reviewText.value.length > max) reviewText.value = reviewText.value.slice(0, max);
+      update();
+    });
+    update();
+  }
+
+  /* ---------- Photo upload box (cosmetic file picker) ---------- */
+  const uploadBox = document.querySelector('.upload-box');
+  if (uploadBox) {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.multiple = true;
+    input.style.display = 'none';
+    uploadBox.appendChild(input);
+    uploadBox.addEventListener('click', () => input.click());
+    input.addEventListener('change', () => {
+      const label = uploadBox.querySelector('.upload-label');
+      if (label && input.files.length) {
+        label.textContent = `เลือกแล้ว ${input.files.length} รูปภาพ`;
       }
     });
   }
 
-  // ----------------------------------------------------
-  // 2. ระบบสลับธีม Dark / Light Mode
-  // ----------------------------------------------------
-  const themeBtn = document.getElementById('theme-toggle');
-  
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-theme');
-    if (themeBtn) themeBtn.textContent = '☀️';
-  }
-
-  if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark-theme');
-      const isDark = document.body.classList.contains('dark-theme');
-      themeBtn.textContent = isDark ? '☀️' : '🌙';
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
-  }
-
-  // ----------------------------------------------------
-  // 3. ระบบเข้าสู่ระบบ & ลงทะเบียน
-  // ----------------------------------------------------
-  const tabLogin = document.getElementById('tab-login');
-  const tabRegister = document.getElementById('tab-register');
-  const loginForm = document.getElementById('login-form');
-  const registerForm = document.getElementById('register-form');
-  const authContainer = document.getElementById('auth-container');
-  const profileCard = document.getElementById('user-profile-card');
-  const welcomeText = document.getElementById('welcome-text');
-  const userInfoDetail = document.getElementById('user-info-detail');
-  const logoutBtn = document.getElementById('logout-btn');
-
-  if (tabLogin && tabRegister) {
-    tabLogin.addEventListener('click', () => {
-      tabLogin.classList.add('active');
-      tabRegister.classList.remove('active');
-      loginForm.style.display = 'block';
-      registerForm.style.display = 'none';
-    });
-
-    tabRegister.addEventListener('click', () => {
-      tabRegister.classList.add('active');
-      tabLogin.classList.remove('active');
-      registerForm.style.display = 'block';
-      loginForm.style.display = 'none';
-    });
-  }
-
-  const loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
-  if (loggedInUser) {
-    showProfile(loggedInUser);
-  }
-
-  if (registerForm) {
-    registerForm.addEventListener('submit', (e) => {
+  /* ---------- Review submit ---------- */
+  const reviewForm = document.querySelector('.review-form');
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const newUser = {
-        fullname: document.getElementById('reg-fullname').value,
-        phone: document.getElementById('reg-phone').value,
-        faculty: document.getElementById('reg-faculty').value || '-',
-        email: document.getElementById('reg-email').value,
-        password: document.getElementById('reg-password').value
-      };
-
-      let users = JSON.parse(localStorage.getItem('usersList')) || [];
-      users.push(newUser);
-      localStorage.setItem('usersList', JSON.stringify(users));
-
-      localStorage.setItem('currentUser', JSON.stringify(newUser));
-      alert('ลงทะเบียนสำเร็จแล้ว!');
-      showProfile(newUser);
+      const submitBtn = reviewForm.querySelector('button[type="submit"]');
+      submitBtn.textContent = 'ส่งรีวิวแล้ว ✓';
+      submitBtn.disabled = true;
     });
   }
 
+  /* ---------- Login form (cosmetic validation) ---------- */
+  const loginForm = document.querySelector('.login-form');
   if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
-
-      const users = JSON.parse(localStorage.getItem('usersList')) || [];
-      const matchedUser = users.find(u => u.email === email && u.password === password);
-
-      if (matchedUser) {
-        localStorage.setItem('currentUser', JSON.stringify(matchedUser));
-        showProfile(matchedUser);
-      } else {
-        const tempUser = { fullname: email.split('@')[0], email: email, phone: '-', faculty: '-' };
-        localStorage.setItem('currentUser', JSON.stringify(tempUser));
-        showProfile(tempUser);
+      const email = loginForm.querySelector('#email');
+      const error = loginForm.querySelector('.form-error');
+      if (email && !email.value.includes('@')) {
+        error.textContent = 'กรุณากรอกอีเมลมหาวิทยาลัยให้ถูกต้อง';
+        error.classList.add('show');
+        return;
       }
+      if (error) error.classList.remove('show');
+      const btn = loginForm.querySelector('button[type="submit"]');
+      btn.textContent = 'กำลังเข้าสู่ระบบ...';
     });
   }
 
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      localStorage.removeItem('currentUser');
-      authContainer.style.display = 'block';
-      profileCard.style.display = 'none';
+  /* ---------- Campus map: pin -> popup ---------- */
+  const popup = document.querySelector('.map-popup');
+  document.querySelectorAll('.map-pin').forEach(pin => {
+    pin.addEventListener('click', () => {
+      if (!popup) return;
+      const name = pin.dataset.name || '';
+      const desc = pin.dataset.desc || '';
+      popup.querySelector('h4').textContent = name;
+      popup.querySelector('p').textContent = desc;
+      popup.style.display = 'block';
+      document.querySelectorAll('.map-pin').forEach(p => p.classList.remove('pin-selected'));
+      pin.classList.add('pin-selected');
     });
+  });
+  const popupClose = document.querySelector('.map-popup .popup-head button');
+  if (popupClose && popup) {
+    popupClose.addEventListener('click', () => { popup.style.display = 'none'; });
   }
 
-  function showProfile(user) {
-    if (welcomeText && userInfoDetail) {
-      welcomeText.textContent = `ยินดีต้อนรับ, ${user.fullname}!`;
-      userInfoDetail.innerHTML = `
-        📧 อีเมล: ${user.email}<br>
-        📞 เบอร์โทรศัพท์: ${user.phone}<br>
-        🎓 คณะ/ภาควิชา: ${user.faculty}
-      `;
-      authContainer.style.display = 'none';
-      profileCard.style.display = 'grid';
-    }
-  }
-
-  // ----------------------------------------------------
-  // 4. ระบบค้นหา (Search Filter)
-  // ----------------------------------------------------
-  const searchInput = document.querySelector('.search input');
-  const searchForm = document.querySelector('.search');
-  const cards = document.querySelectorAll('.place-card');
-
-  if (searchForm && searchInput) {
-    searchForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const query = searchInput.value.toLowerCase().trim();
-
-      cards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const text = card.querySelector('p:not(.kicker)').textContent.toLowerCase();
-        
-        if (title.includes(query) || text.includes(query)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+  /* ---------- View toggle (list / map) ---------- */
+  document.querySelectorAll('.view-toggle').forEach(toggle => {
+    toggle.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        toggle.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
       });
-    });
-  }
-
-  // ----------------------------------------------------
-  // 5. ปุ่มบันทึกกิจกรรม (Save Event Button)
-  // ----------------------------------------------------
-  const saveBtns = document.querySelectorAll('.outline-btn');
-  const savedCountElem = document.getElementById('saved-count');
-  let savedCount = parseInt(savedCountElem ? savedCountElem.textContent : 12);
-
-  saveBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (btn.classList.contains('saved')) {
-        btn.classList.remove('saved');
-        btn.textContent = 'บันทึก';
-        savedCount--;
-      } else {
-        btn.classList.add('saved');
-        btn.textContent = 'บันทึกแล้ว ✓';
-        savedCount++;
-      }
-      if (savedCountElem) savedCountElem.textContent = savedCount;
     });
   });
 
-  // ----------------------------------------------------
-  // 6. เมนูปุ่มกดสำหรับหน้าจอมือถือ (Mobile Navigation Menu)
-  // ----------------------------------------------------
-  const menuBtn = document.querySelector('.menu');
-  const nav = document.querySelector('.nav');
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener('click', () => {
-      nav.classList.toggle('nav--open');
-    });
-  }
 });

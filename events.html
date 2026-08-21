@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ค้นหาสถานที่ - UniDirectory</title>
+<title>กิจกรรมและข่าวสาร - UniDirectory</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,9 +15,9 @@
       UniDirectory
     </a>
     <nav class="main-nav">
-      <a href="index.html" class="active">ค้นพบ</a>
+      <a href="index.html">ค้นพบ</a>
       <a href="profile.html">บันทึกไว้</a>
-      <a href="events.html">กิจกรรม</a>
+      <a href="events.html" class="active">กิจกรรม</a>
       <a href="map.html">แผนที่วิทยาเขต</a>
     </nav>
     <div class="header-actions">
@@ -72,77 +72,85 @@
     </aside>
 
     <section class="content">
-      <div class="content-head">
-        <div>
-          <h1>ค้นหาสถานที่</h1>
-          <p class="count">แสดง 24 สถานที่ใกล้แผนที่มหาวิทยาลัย</p>
+      <h1 style="font-size:26px; margin-bottom:18px;">กิจกรรมและข่าวสาร</h1>
+
+      <div class="hero-banner">
+        <img src="img/night-market.svg" alt="บรรยากาศงาน Student Night Market">
+        <div class="hero-overlay">
+          <span class="hero-tag">Featured</span>
+          <h2>Student Night Market</h2>
+          <div class="hero-meta">
+            <span>🕔 วันศุกร์นี้, 17:00 – 22:00 น.</span>
+          </div>
+        </div>
+        <div class="hero-dots"><span class="active"></span><span></span></div>
+      </div>
+
+      <div class="event-filters pill-group">
+        <button class="pill active" type="button">ทั้งหมด</button>
+        <button class="pill" type="button">วิชาการ</button>
+        <button class="pill" type="button">บันเทิง</button>
+        <button class="pill" type="button">กีฬา</button>
+        <button class="pill" type="button">ตลาดนัด</button>
+        <div class="search-box">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="ค้นหากิจกรรม...">
         </div>
         <button class="sort-select" type="button">
-          เรียงโดย: แนะนำ
+          เร็วๆ นี้
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
       </div>
 
-      <div class="card-grid">
-        <article class="place-card">
-          <div class="place-photo">
-            <img src="img/quad-coffee.svg" alt="ภายในร้าน The Quad Coffee">
-            <span class="rating-chip">★ 4.8</span>
-            <span class="badge badge-discount">ส่วนลดนักศึกษา 15%</span>
-            <button class="save-heart" aria-label="บันทึกสถานที่">
-              <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-10-9.28C.5 8.5 2 4.5 6 4.5c2.2 0 3.7 1.3 6 3.7 2.3-2.4 3.8-3.7 6-3.7 4 0 5.5 4 4 7.22C19 16.65 12 21 12 21z"/></svg>
-            </button>
+      <div class="event-grid">
+        <article class="event-card">
+          <div class="event-photo">
+            <img src="img/debate.svg" alt="การแข่งขันโต้วาทีระดับมหาวิทยาลัย">
+            <span class="event-cat cat-academic">วิชาการ</span>
           </div>
-          <div class="place-info">
-            <h3>The Quad Coffee</h3>
-            <p class="cat">คาเฟ่และพื้นที่อ่านหนังสือ</p>
-            <div class="place-meta">
-              <span class="dist">📍 ห่างจากสโมสรนักศึกษา 0.2 กม.</span>
-              <span class="price-tag">$$</span>
+          <div class="event-info">
+            <h3>การแข่งขันโต้วาทีระดับมหาวิทยาลัย รอบชิงชนะเลิศ</h3>
+            <div class="event-details">
+              <span>📅 25 ต.ค. 2024</span>
+              <span>🕐 13:00 – 16:00 น.</span>
+              <span>📍 หอประชุมใหญ่ (ดูแผนที่)</span>
             </div>
+            <button class="btn btn-outline-maroon btn-block" type="button">สนใจ</button>
           </div>
         </article>
 
-        <article class="place-card">
-          <div class="place-photo">
-            <img src="img/library-tavern.svg" alt="บรรยากาศภายใน Library Tavern">
-            <span class="rating-chip">★ 4.5</span>
-            <button class="save-heart" aria-label="บันทึกสถานที่">
-              <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-10-9.28C.5 8.5 2 4.5 6 4.5c2.2 0 3.7 1.3 6 3.7 2.3-2.4 3.8-3.7 6-3.7 4 0 5.5 4 4 7.22C19 16.65 12 21 12 21z"/></svg>
-            </button>
+        <article class="event-card">
+          <div class="event-photo">
+            <img src="img/music-fest.svg" alt="Campus Music Festival คหน้ามอ">
+            <span class="event-cat cat-social">บันเทิง</span>
           </div>
-          <div class="place-info">
-            <h3>Library Tavern</h3>
-            <p class="cat">ผับและปิ้งย่าง</p>
-            <div class="place-meta">
-              <span class="dist">📍 ห่างจากสโมสรนักศึกษา 0.5 กม.</span>
-              <span class="price-tag">$$$</span>
+          <div class="event-info">
+            <h3>Campus Music Festival: คหน้ามอ</h3>
+            <div class="event-details">
+              <span>📅 27 ต.ค. 2024</span>
+              <span>🕐 16:00 – 23:00 น.</span>
+              <span>📍 ลานกิจกรรมกลางแจ้ง</span>
             </div>
+            <button class="btn btn-outline-maroon btn-block" type="button">สนใจ</button>
           </div>
         </article>
 
-        <article class="place-card">
-          <div class="place-photo">
-            <img src="img/green-bowl.svg" alt="เคาน์เตอร์ร้าน Green Bowl">
-            <span class="rating-chip">★ 4.2</span>
-            <span class="badge badge-closing">กำลังจะปิด</span>
-            <button class="save-heart" aria-label="บันทึกสถานที่">
-              <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-10-9.28C.5 8.5 2 4.5 6 4.5c2.2 0 3.7 1.3 6 3.7 2.3-2.4 3.8-3.7 6-3.7 4 0 5.5 4 4 7.22C19 16.65 12 21 12 21z"/></svg>
-            </button>
+        <article class="event-card">
+          <div class="event-photo">
+            <img src="img/basketball.svg" alt="Freshy Basketball Cup 2024">
+            <span class="event-cat cat-sport">กีฬา</span>
+            <span class="event-warn">⚠ ปิดรับสมัครเร็วๆ นี้</span>
           </div>
-          <div class="place-info">
-            <h3>Green Bowl</h3>
-            <p class="cat">อาหารเพื่อสุขภาพ</p>
-            <div class="place-meta">
-              <span class="dist">📍 ห่างจากสโมสรนักศึกษา 0.8 กม.</span>
-              <span class="price-tag">$$</span>
+          <div class="event-info">
+            <h3>Freshy Basketball Cup 2024</h3>
+            <div class="event-details">
+              <span>📅 1 พ.ย. 2024</span>
+              <span>🕐 09:00 – 17:00 น.</span>
+              <span>📍 โรงยิมเนเซียม 1</span>
             </div>
+            <button class="btn btn-primary btn-block" type="button">สนใจ</button>
           </div>
         </article>
-      </div>
-
-      <div class="load-more-wrap">
-        <button class="btn btn-primary load-more-btn" type="button">โหลดสถานที่เพิ่มเติม</button>
       </div>
     </section>
   </div>

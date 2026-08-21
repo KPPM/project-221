@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รีวิว The Study Hub - UniDirectory</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 10-5-10-5z" fill="currentColor"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+      UniDirectory
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">ค้นพบ</a>
+      <a href="profile.html">บันทึกไว้</a>
+      <a href="events.html">กิจกรรม</a>
+      <a href="map.html">แผนที่วิทยาเขต</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="การแจ้งเตือน">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="dot"></span>
+      </button>
+      <button class="icon-btn" aria-label="บัญชีผู้ใช้">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container" style="padding-top:24px; padding-bottom:60px; max-width: 980px;">
+
+    <a href="detail.html" class="back-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"/></svg>
+      กลับไปหน้าร้านค้า
+    </a>
+
+    <div class="review-page-head">
+      <h1>The Study Hub</h1>
+      <div class="score-row"><span class="stars">★★★★★</span> 4.8 (124 รีวิว)</div>
+    </div>
+
+    <div class="review-page-grid">
+      <div class="panel">
+        <h3 style="margin-bottom:16px;">เขียนรีวิว</h3>
+
+        <form class="review-form">
+          <div class="field">
+            <label>ให้คะแนนสถานที่นี้</label>
+            <div class="star-picker" data-value="0">
+              <button type="button" aria-label="1 ดาว">★</button>
+              <button type="button" aria-label="2 ดาว">★</button>
+              <button type="button" aria-label="3 ดาว">★</button>
+              <button type="button" aria-label="4 ดาว">★</button>
+              <button type="button" aria-label="5 ดาว">★</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="reviewText">ความคิดเห็น</label>
+            <textarea id="reviewText" placeholder="บอกเล่าประสบการณ์ของคุณที่ร้านนี้..."></textarea>
+            <p class="char-count">0 / 500</p>
+          </div>
+
+          <div class="field">
+            <label>เพิ่มรูปภาพ (ไม่บังคับ)</label>
+            <div class="upload-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5-4 4-2-2-5 5"/></svg>
+              <p class="upload-label">คลิกเพื่ออัปโหลด หรือลากรูปภาพมาวางที่นี่</p>
+            </div>
+          </div>
+
+          <p class="upload-note">⚠️ ส่งรีวิวแล้วไม่สามารถแก้ไขได้ในภายหลัง กรุณาตรวจสอบข้อความก่อนส่ง</p>
+
+          <button type="submit" class="btn btn-primary btn-block">ส่งรีวิว</button>
+        </form>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:16px;">รีวิวล่าสุด</h3>
+        <div class="recent-reviews">
+          <div class="review-card">
+            <div class="review-card-top">
+              <div class="reviewer">
+                <img class="avatar-badge" style="border-radius:50%; width:34px; height:34px; object-fit:cover;" src="img/avatar-tn.svg" alt="ทันตวิภา น.">
+                <div>
+                  <div class="name-row">ทันตวิภา น. <span class="verified">✔️</span></div>
+                  <p class="date">12 ตุลาคม 2024</p>
+                </div>
+              </div>
+              <span class="stars">★★★★★</span>
+            </div>
+            <p class="text">ที่นั่งกว้างขวาง เงียบสงบเหมาะแก่การทำงานกลุ่มหรืออ่านหนังสือคนเดียว ปลั๊กไฟมีให้ทุกโต๊ะไม่ต้องแย่งกัน แนะนำมากค่ะ</p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-card-top">
+              <div class="reviewer">
+                <img class="avatar-badge" style="border-radius:50%; width:34px; height:34px; object-fit:cover;" src="img/avatar-wp.svg" alt="วีรพงษ์ ต.">
+                <div>
+                  <div class="name-row">วีรพงษ์ ต. <span class="verified">✔️</span></div>
+                  <p class="date">6 ตุลาคม 2024</p>
+                </div>
+              </div>
+              <span class="stars">★★★★☆</span>
+            </div>
+            <p class="text">โต๊ะเยอะดี บรรยากาศเงียบสงบ อากาศถ่ายเทดีในช่วงเช้า แต่ช่วงบ่ายผู้คนเยอะมากจนหาที่นั่งยาก ควรจองล่วงหน้า</p>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-block" style="margin-top:16px;" type="button">ดูรีวิวเพิ่มเติม</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-brand">UniDirectory</span>
+    <span class="footer-copy">© 2024 University Student Directory. Built for the academic community.</span>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
