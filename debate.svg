@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260">
+  <defs><linearGradient id="g_debate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2f4f8f"/>
+      <stop offset="100%" stop-color="#5c85c4"/>
+    </linearGradient></defs>
+  <rect width="400" height="260" fill="url(#g_debate)"/>
+  <g transform="translate(10.0,0)"><rect x="170" y="90" width="40" height="90" rx="20" fill="none" stroke="white" stroke-width="7" opacity="0.9"/><path d="M140 160c0 35 25 60 50 60s50-25 50-60" fill="none" stroke="white" stroke-width="6" opacity="0.7"/><line x1="190" y1="220" x2="190" y2="245" stroke="white" stroke-width="6" opacity="0.7"/><line x1="160" y1="245" x2="220" y2="245" stroke="white" stroke-width="6" opacity="0.7"/></g>
+  <text x="200.0" y="236" font-family="Kanit, sans-serif" font-size="15" font-weight="600" fill="white" fill-opacity="0.92" text-anchor="middle">การแข่งขันโต้วาที</text>
+</svg>

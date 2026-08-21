@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260">
+  <defs><linearGradient id="g_green-bowl" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f7a4c"/>
+      <stop offset="100%" stop-color="#5cb37e"/>
+    </linearGradient></defs>
+  <rect width="400" height="260" fill="url(#g_green-bowl)"/>
+  <g transform="translate(10.0,0)"><path d="M100 165h180c0 45-40 80-90 80s-90-35-90-80z" fill="none" stroke="white" stroke-width="7" opacity="0.9"/><path d="M120 165c0-30 25-55 70-55s70 25 70 55" fill="none" stroke="white" stroke-width="5" opacity="0.5"/></g>
+  <text x="200.0" y="236" font-family="Kanit, sans-serif" font-size="15" font-weight="600" fill="white" fill-opacity="0.92" text-anchor="middle">Green Bowl</text>
+</svg>
